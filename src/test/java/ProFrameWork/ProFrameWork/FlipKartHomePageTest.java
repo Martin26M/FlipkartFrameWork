@@ -1,6 +1,10 @@
 package ProFrameWork.ProFrameWork;
 
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.testng.annotations.Test;
 
@@ -16,12 +20,13 @@ public class FlipKartHomePageTest extends BaseTest {
 	public void flipkartHomecheck() throws InterruptedException, IOException {
 
 		FlipkartHomePage pg = new FlipkartHomePage(driver);
-
+	
 		pg.closePopup();
 		pg.FindSplitAC();
        String s =  pg.getItem();
-       String s2 =TestUtil.getData("WorkBook 2", "Sheet1", 1, 1);
-        
+      // String s2 =TestUtil.getData("WorkBook 2", "Sheet1", 1, 1);
+
+ 
 	   pg.getProductList();
 	}
 

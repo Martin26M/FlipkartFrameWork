@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,9 +37,11 @@ public class TestUtil extends BaseTest {
 	public static XSSFWorkbook workbook;
 
 	public void Takescreenshot(String picname) throws IOException {
-
+		Date d = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyy HH:mm:ss");
+		String date = format.format(d);
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "\\Screenshots" + picname + ".png"));
+		FileUtils.copyFile(src, new File(System.getProperty("user.dir") + "\\Screenshots" + picname +date +".png"));
 
 	}
 
@@ -67,6 +71,7 @@ public class TestUtil extends BaseTest {
 
 		XSSFCell cell = row.getCell(colnum);
 		DataFormatter formatter = new DataFormatter();
+		
 		String data;
 		try {
 
@@ -103,51 +108,49 @@ public class TestUtil extends BaseTest {
 		driver.switchTo().window(Parent);
 
 	}
-
-	public List<Map<String, String>> readanyDatafromExcel(String bookname, String sheetname) throws IOException {
-
-		File file = new File (System.getProperty("User.dir")+"\\pathname");
-		FileInputStream fis = new FileInputStream(
-				"C:\\Users\\HP\\new-workspace2\\ProFrameWork - FlipKart\\" + bookname + ".xlsx");
-		
-		workbook = new XSSFWorkbook(fis);
-
-		ArrayList<String> list = new ArrayList<String>();
-
-		List<Map<String, String>> allcelldata = new ArrayList<Map<String, String>>();
-
-		TreeMap<String, String> testdata = new TreeMap<String, String>();
-
-		XSSFSheet sheet = workbook.getSheet(sheetname);
-
-		int rowcount = sheet.getLastRowNum();
-		int colcount = sheet.getRow(0).getLastCellNum();
-
-		for (int i = 0; i < colcount; i++) {
-
-			Cell cell = sheet.getRow(0).getCell(i);
-
-			String headerdata = cell.getStringCellValue().trim();
-			list.add(headerdata);
-
-		}
-
-		for (int j = 1; j < rowcount; j++) {
-			
-		Row row= 	sheet.getRow(j);
-		
-		for (int k=0; k<colcount ; k++) {
-			
-		Cell cell =	row.getCell(k);
-		String cellvalue  =cell.getStringCellValue().trim();
-		testdata.put(list.get(k), cellvalue);
-		
-		
-		}
-	 allcelldata.add(testdata);
-		
-		}
-return allcelldata;
-	}
-
 }
+//
+//	public static List<Map<String, String>> readanyDatafromExcel(String bookname, String sheetname) throws IOException {
+//
+//		File file = new File (System.getProperty("User.dir")+"\\pathname");
+//		FileInputStream fis = new FileInputStream(
+//				"C:\\Users\\HP\\new-workspace2\\ProFrameWork - FlipKart\\" + bookname + ".xlsx");
+//		
+//		workbook = new XSSFWorkbook(fis);
+//
+//		ArrayList<String> list = new ArrayList<String>();
+//
+//		List<Map<String, String>> allcelldata = new ArrayList<Map<String, String>>();
+//
+//		TreeMap<String, String> testdata = new TreeMap<String, String>();
+//
+//		XSSFSheet sheet = workbook.getSheet(sheetname);
+//
+//		int rowcount = sheet.getLastRowNum();
+//		int colcount = sheet.getRow(0).getLastCellNum();
+//
+//		for (int i = 0; i < colcount; i++) {
+//
+//			Cell cell = sheet.getRow(0).getCell(i);
+//
+//			String headerdata = cell.getStringCellValue().trim();
+//			list.add(headerdata);
+//
+//		}
+//
+//		for (int j = 1; j < rowcount; j++) {
+//			
+//		Row row= 	sheet.getRow(j);
+//		
+//		for (int k=0; k<colcount ; k++) {
+//			
+//		Cell cell =	row.getCell(k);
+//	
+//	
+//	 allcelldata.add(testdata);
+//		
+//		}
+//return allcelldata;
+//	}
+//
+//}}
